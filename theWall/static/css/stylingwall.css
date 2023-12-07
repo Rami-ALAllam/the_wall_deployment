@@ -1,0 +1,72 @@
+*{
+    font-family: sans-serif;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+}
+.right{
+    display: flex;
+    gap: 100px;
+}
+.right a{
+    margin-top: 30px;
+    font-size: larger;
+}
+.right h2{
+    margin-top: 30px;
+}
+hr{
+    border: 2px solid black;
+}
+.postadd{
+    padding-left: 120px;
+    padding-bottom: 50px;
+}
+.postadd h1{
+margin-bottom: 10px;
+}
+.postadd textarea{
+    border: 2px solid black;
+}
+.btn{
+    font-size: large;
+    color: white;
+    background-color:#2b78e4;
+    padding: 5px 30px;
+    border: 3px solid black;
+    box-shadow: 3px 3px black;
+    position: relative;
+    top: 40px;
+    right: 200px;
+}
+.post{
+    padding-left: 50px;
+}
+.post p{
+    padding-left: 30px;
+}
+.comment{
+    padding-left: 80px;
+}
+.comment p{
+    padding-left: 30px;
+}
+.commentadd h1{
+margin-bottom: 10px;
+}
+.commentadd textarea{
+    border: 2px solid black;
+}
+.commentadd button{
+    font-size: large;
+    color: white;
+    background-color:#009e0f;
+    padding: 5px 30px;
+    border: 3px solid black;
+    box-shadow: 3px 3px black;
+    position: relative;
+    left:360px;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stylingwall.css' %}">
+</head>
+
+<body>
+    <div class="header">
+        <h1>CodingDojo Wall</h1>
+        <div class="right">
+            <h2>Welcome, {{request.session.username}}!</h2>
+            <a href="/logout">Log off</a>
+        </div>
+    </div>
+    <hr>
+
+    <div class="postadd">
+        <form action="/create_post" method="post">
+            {%csrf_token%}
+            <h1>Post a message</h1>
+            <textarea name="content" cols="170" rows="5"></textarea>
+            <button type="submit" class="btn">Post a message</button>
+        </form>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <h1>Your Timeline</h1>
+    {% for message1 in allmessage %}
+    <div class="post">
+        <h2>{{message1.user_owner.first_name}} {{message1.user_owner.last_name}} - {{message1.created_at.date}}
+            {% if message1.user_owner.id == request.session.id %}
+            <a href="/delete_post/{{message1.id}}">(Delete Post)</a>
+            {%endif%}
+        </h2>
+        <p>{{message1.message}}</p>
+
+    <div class="comment">
+        <h2>Comments</h2>
+        {%for comment in message1.related_comments.all%}
+        <!-- <input type="hidden" name="created" value="{{comment.created_at}}"> -->
+        <h2> ({{comment.user_owner.first_name}} {{comment.user_owner.last_name}} {{comment.created_at}}) </h2>
+        <p>{{comment.comment}}</p>
+            {% if comment.user_owner.id == request.session.id %}
+            <a href="/delete_comment/{{comment.id}}">(Delete comment)</a>
+            {%endif%}
+        {%endfor%}
+
+        <div class="commentadd">
+        <form action="/create_comment" method="post">
+            {%csrf_token%}
+            <h1>Post a comment<br>
+                <textarea name="content" cols="80" rows="5"></textarea>
+            </h1>
+            <input type="hidden" name="mess" value="{{message1.id}}">
+            <button type="submit">Post a comment</button>
+        </form>
+        
+    </div>
+    </div>
+</div>
+{%endfor%}
+</body>
+
+</html>
